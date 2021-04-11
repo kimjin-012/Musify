@@ -18,4 +18,5 @@ Creating Similar Website to Spotify
 ## Usage
 
 
-## Contact
+## Contact / About Me
+Jin Kim - [Github](https://github.com/kimjin-012) - [LinkedIn](https://www.linkedin.com/in/jin-kim-code/)
