@@ -7,7 +7,9 @@ Creating Similar Website to Spotify
 
 
 ### Built with
-
+- Python
+- Django
+- Regex
 
 ## Getting Started
 
