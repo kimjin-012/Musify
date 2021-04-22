@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Feed</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/newsfeed.css' %}" />
+</head>
+<body>
+    <header>
+        <div class="header">
+            <h1>Musify</h1>
+            <h3>Songs friends of {{this_user.first_name}} listen to!</h3>
+            <div class="main_links">
+              <button><a href="/playlist">Playlist</a></button>
+              <button><a href="/musicPlayer">View Player</a></button>
+              <form action="/logout">
+                <button type="submit">Logout</button>
+              </form>
+        </div>
+    </header>
+    <div class="sub_header">
+      <h2>NEWS FEED</h2>
+    </div>
+    <div class="main">
+      <table id="table" class="table">
+        <thead>
+          <tr>
+            <th scope="col">User</th>
+            <th scope="col">Artist</th>
+            <th scope="col">Song</th>
+            <th scope="col">Actions</th>
+            <th scope="col">Add Song</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for song in liked_songs %}
+          <tr>
+            <td>{{song.user.username}}</td>
+            <td>{{song.artist}}
+            <td>{{song.song}}</td>
+            <td>
+              <form class="playlist" action="/playSong" method="POST">
+                {% csrf_token %}
+                <button class="playButton" type="submit" name="button" value="{{song.songId}}">play</button>
+              </form>
+            </td>
+            {% if this_user.id is not song.user.id %}
+            <td>
+              <form action="/likeButton" method="POST">
+                {% csrf_token %}
+                <button type="submit" name="like-btn" value="{{song.songId}}">LIKE SONG</button>
+              </form>
+            </td>
+          {% endif %}
+          </tr>
+        </tbody>
+          {% endfor %}
+      </table>
+    </div>
+</body>
+</html>

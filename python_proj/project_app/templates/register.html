@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/register.css' %}" />
+  </head>
+  <body>
+    <div class="logo">
+      <h1>Musify</h1>
+    </div>
+    <div class="registration">
+      <h2>Registration</h2>
+      <ul>
+        {% for message in messages %}
+        <li class="warning">{{message}}</li>
+        {% endfor %}
+      </ul>
+      <form action="/register" method="POST">
+        {% csrf_token %}
+        <!-- <label for="fname">First Name</label> -->
+        <input type="text" name="fname" placeholder="first name" />
+        <!-- <label for="lname">Last Name</label> -->
+        <input type="text" name="lname" placeholder="last name" />
+        <!-- <label for="email">Email</label> -->
+        <input type="text" name="email" placeholder="email" />
+
+        <!-- <label for="user_name">Username</label> -->
+        <input type="username" name="username" placeholder="username" />
+
+        <!-- <label for="pword">Password</label> -->
+        <input type="password" name="pword" placeholder="password" />
+
+        <!-- <label for="confirm_pw">Confirm PW</label> -->
+        <input
+          type="password"
+          name="confirm_pw"
+          placeholder="confirm password"
+        />
+
+        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="button" class="btn btn-primary">
+          <a href="/">Cancel</a>
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

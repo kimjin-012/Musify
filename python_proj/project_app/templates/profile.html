@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+    <link rel="stylesheet" href="{% static 'js/profile.js' %}" />
+</head>
+<body>
+    <div class="header">
+        <h1>Musify</h1>
+        <h3>Welcome to your profile {{this_user.first_name}}</h3>
+        <div class="main_links">
+            <button><a href="/newsfeed">News Feed</a></button>
+            <button><a href="/playlist">Playlist</a></button>
+            <button><a href="/musicPlayer">View Player</a></button>
+            <form action="/logout">
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+    <div class="profile">
+        <img src="{% static "css/conspiracy-keanu.jpg" %}" alt="Hi!" />
+        <ul class="infoList">
+            <li>Listening Time : TBD</li>
+            <li>Favorite Genres: TBD</li>
+            <li>Account Created: {{ this_user.created_at }}</li>
+            <li>Friends with: TBD</li>
+        </ul>
+        <div class="liked_songs">
+            <h2>Recent Liked Songs</h2>
+            <table id="table_like" class="table_like">
+                <thead>
+                    <tr>
+                        <th scope="col">Artist</th>
+                        <th scope="col">Song</th>
+                        <th scope="col">Album</th>
+                        <th scope="col">Length</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for song in liked_songs %}
+                    {% if song.user.id == request.session.userID %}
+                    <tr>
+                        <td>{{song.artist}}</td>
+                        <td>{{song.song}}</td>
+                        <td>{{song.album}}</td>
+                        <td>{{song.duration}}</td>
+                        <td>
+                            <form class="playlist" action="/playSong" method="POST">
+                                {% csrf_token %}
+                                <button class="playButton" type="submit" name="button" value="{{song.songId}}">play</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

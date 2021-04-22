@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <script src="{% static 'js/musicPlayer.js' %}"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="menu">
+            <ul>
+                <li id="maintext">Musify</li>
+                <li><a href="/profile" class="myProfile-btn">My Profile</a></li>
+                <li><a href="/playlist" class="playlist-btn">Playlists</a></li>
+                <li class="searchbar">
+                    <!-- <form action="search" method="post">
+                        {%csrf_token%}
+                        <label for="search">Search:</label>
+                        <input type="text" name="search">
+                        <select name="type" id="songType">
+                            <option value="track">Song Title</option>
+                            <option value="artist">Artist</option>
+                        </select>
+                        <button type="submit">Search</button>
+                    </form> -->
+                    <!-- this is the fancy searchbar! -->
+                    <div class="main-form-container">
+                        <form action="search" method="post">
+                            {%csrf_token%}
+                            <input type="text" class="main-input main-title" name="search" onfocus="clearText(this)"
+                                onblur="replaceText(this)" />
+                            <select name="type" id="songType" type="button" class="main-btn">
+                                <option value="track" class="search-small">Song Title</option>
+                                <option value="artist" class="search-large">Artist</p>
+                            </select>
+                            <input id="main-submit" class="" type="submit" />
+                        </form>
+                    </div>
+                </li>
+                <li><a href="/logout" class="logout-btn"><span> Logout</span></a></li>
+            </ul>
+        </div>
+
+
+        <div class="musicPlayer">
+            <section>
+                <img src="{{request.session.img}}" alt="Album Cover">
+                <!-- <form class="playlist" action="/playSong" method="POST">
+                    {% csrf_token %}
+                    <ul>
+                        {% for i in songInfo %}
+                        <label for="button">
+                            <li>
+                                {{i.name}} by {{i.artists.0.name}}
+                                <button class="playButton" type="submit" name="button" value={{i.id}}>play</button>
+                            </li>
+                        </label>
+                        {% endfor%}
+                    </ul>
+                </form> -->
+                <p><iframe src="https://open.spotify.com/embed/track/{{request.session.id}}" width="450" height="80"
+                        frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></p>
+                <form class="likeButton" action="/likeButton" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" name="like-btn" value="{{request.session.id}}">LIKE SONG</button>
+                </form>
+            </section>
+        </div>
+
+        <div id="infoPanels">
+            <div class="panel">
+                <h2>Newsfeed</h2>
+                <div class="main">
+                    <table id="table" class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">User</th>
+                                <th scope="col">Artist</th>
+                                <th scope="col">Song</th>
+                                <th scope="col">Actions</th>
+                                <th scope="col">Add Song</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for song in liked_songs %}
+                            <tr>
+                                <td>{{song.user.username}}</td>
+                                <td>{{song.artist}}
+                                <td>{{song.song}}</td>
+                                <td>
+                                    <form class="newsfeedbutton" action="/playSong" method="POST">
+                                        {% csrf_token %}
+                                        <button class="playButton" type="submit" name="button"
+                                            value="{{song.songId}}">play</button>
+                                    </form>
+                                </td>
+                                {% if this_user.id is not song.user.id %}
+                                <td>
+                                    <form action="/likeButton" method="POST">
+                                        {% csrf_token %}
+                                        <button class="playButton" type="submit" name="like-btn" value="{{song.songId}}">LIKE SONG</button>
+                                    </form>
+                                </td>
+                                {% endif %}
+                            </tr>
+                        </tbody>
+                        {% endfor %}
+                    </table>
+                </div>
+
+            </div>
+            <div class="panel">
+                <h2>Search Results</h2>
+                <form class="playlist" action="/playSong" method="POST">
+                    {% csrf_token %}
+                    <ul>
+                        {% for i in songInfo %}
+                        <label for="button">
+                            <li>
+                                {{i.name}} by {{i.artists.0.name}}
+                                <button class="playButton" type="submit" name="button" value={{i.id}}>play</button>
+                            </li>
+                        </label>
+                        {% endfor%}
+                    </ul>
+                </form>
+            </div>
+
+            <div class="panel">
+                <h2>If you like {{ request.session.name }}, you might also like</h2>
+                <form class="similarArtist" action="/playSong" method="POST">
+                    {% csrf_token %}
+                    <ul>
+                        {% for i in recommend.tracks %}
+                        <label for="button">
+                            <li>
+                                <img src="{{i.album.images.2.url}}" alt="recom cover">
+                                {{i.name}} by {{i.album.artists.0.name}}
+                                <button class="similarPlayButton" type="submit" name="button"
+                                    value={{i.id}}>play</button>
+                            </li>
+                        </label>
+                        {% endfor%}
+                    </ul>
+                </form>
+            </div>
+        </div>
+</body>

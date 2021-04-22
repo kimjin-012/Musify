@@ -1,0 +1,78 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+/* /* /* * { -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -ms-box-sizing:border-box; -o-box-sizing:border-box; box-sizing:border-box; } */
+html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "Open Sans", sans-serif;
+  background-image: url("music.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.logo {
+  /* background-color: limegreen; */
+  background: linear-gradient(rgb(98, 223, 206), rgb(216, 189, 35));
+}
+h1 {
+  color: rgb(0, 0, 0);
+  text-shadow: 4px 4px 8px #0e0d0d;
+  padding: 10px;
+}
+.registration {
+  position: absolute;
+  top: 31%;
+  left: 45%;
+  margin: -150px 0 0 -150px;
+  width: 400px;
+  height: 650px;
+  border: 2px solid black;
+  background: linear-gradient(rgb(98, 223, 206), rgb(216, 189, 35));
+  opacity: 0.9;
+}
+.registration form {
+  /* display: inline-block;
+  top: 30%; */
+}
+.registration h2 {
+  color: rgb(17, 17, 17);
+  text-shadow: 4px 4px 8px #0e0d0d;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-top: 20px;
+}
+.registration button {
+  margin-left: 75px;
+  color: rgb(5, 5, 5);
+}
+.registration button a {
+  text-decoration: none;
+  color: rgb(7, 7, 7);
+}
+.registration button:hover {
+  background-color: #794c4c;
+}
+.registration button a:hover {
+  color: white;
+}
+input {
+  float: left;
+  width: 70%;
+  border: none;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-left: 60px;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  -webkit-transition: box-shadow 0.5s ease;
+  -moz-transition: box-shadow 0.5s ease;
+  -o-transition: box-shadow 0.5s ease;
+  -ms-transition: box-shadow 0.5s ease;
+  transition: box-shadow 0.5s ease;
+}

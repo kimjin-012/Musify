@@ -1,0 +1,141 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+}
+html {
+  height: 100%;
+}
+body {
+  background: linear-gradient(rgb(98, 223, 206), rgb(216, 189, 35));
+  font-family: "Open Sans", sans-serif;
+  height: 100%;
+  background-repeat: no-repeat;
+}
+.playlist {
+  overflow-y: auto;
+  height: 400px;
+  position: absolute;
+  display: block;
+}
+.liked_songs {
+  overflow-y: auto;
+  height: 400px;
+  position: absolute;
+  display: block;
+}
+table {
+  background: #794c4c;
+  border-radius: 0.25em;
+  border-collapse: collapse;
+  margin: 1em;
+  height: max-content;
+  table-layout: fixed;
+  width: 85%;
+}
+th {
+  border-bottom: 1px solid #364043;
+  color: #e4c723;
+  font-size: 0.85em;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  text-align: left;
+}
+td {
+  color: #fff;
+  font-weight: 400;
+  padding: 0.65em 1em;
+  font-size: smaller;
+  overflow: hidden;
+}
+
+tbody tr {
+  transition: background 0.25s ease;
+}
+tbody tr:hover {
+  background: #576164;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 3px solid black;
+  padding: 10px;
+}
+.header h3 {
+  margin-top: 10px;
+  margin-left: 10px;
+  padding: 10px;
+  color: rgb(8, 8, 8);
+  text-shadow: 4px 4px 8px #0e0d0d;
+  font-size: 30px;
+}
+.header h1 {
+  padding: 10px;
+  /* color: rgb(8, 8, 8);
+  text-shadow: 4px 4px 8px #0e0d0d; */
+  color: #FFFFFF;
+  text-shadow: 0 0 5px rgb(217, 255, 0), 0 0 10px rgb(131, 131, 131), 0 0 15px #FFF, 0 0 20px #0f0f0f, 0 0 30px #303030, 0 0 40px #000000, 0 0 55px #000000, 0 0 75px #000000;
+  color: #ffffff;
+  font-size: 40px;
+}
+.header .main_links {
+  display: flex;
+  justify-content: space-around;
+  /* margin: 5px; */
+}
+.header .main_links button {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 20px;
+  height: 35px;
+  background: linear-gradient(rgb(98, 223, 206), rgb(216, 189, 35));
+}
+.header .main_links button:hover {
+  background: #794c4c;
+}
+.header .main_links button a {
+  text-decoration: none;
+  color: black;
+}
+.table {
+  /* display: none; */
+}
+.table_like {
+  /* display: none; */
+}
+.playlist_btn {
+  padding: 10px;
+}
+.playlist_btn button {
+  padding: 10px;
+  width: 110px;
+  font-size: 10pt;
+  border-radius: 20px;
+  background: linear-gradient(rgb(98, 223, 206), rgb(216, 189, 35));
+}
+.playlist_btn button:hover {
+  background: #794c4c;
+  color: white;
+}
+.liked_btn {
+  padding: 10px;
+}
+.liked_btn button {
+  padding: 10px;
+  width: 110px;
+  font-size: 10pt;
+  border-radius: 20px;
+  background: linear-gradient(rgb(98, 223, 206), rgb(216, 189, 35));
+}
+.liked_btn button:hover {
+  background: #794c4c;
+  color: white;
+}
+.main_btn {
+  display: flex;
+}

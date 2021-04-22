@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Playlist/Liked Songs</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/playlist.css' %}" />
+    <link rel="stylesheet" href="{% static 'js/playlist.js' %}" />
+  </head>
+  <body>
+    <div class="header">
+      <h1>Musify</h1>
+      <h3>{{this_user.first_name}}'s Playlists and Like Songs</h3>
+      <div class="main_links">
+        <button><a href="/newsfeed">News Feed</a></button>
+        <button><a href="/musicPlayer">View Player</a></button>
+        <form action="/logout">
+          <button type="submit">Logout</button>
+        </form>
+      </div>
+    </div>
+    <div class="main_btn">
+      <div class="playlist_btn">
+        <button class="button-toggle" type="button">Playlist</button>
+      </div>
+      <div class="liked_btn">
+        <button class="button-toggle-like" type="button">Liked Songs</button>
+      </div>
+    </div>
+    <div class="playlist">
+      <table id="table" class="table" style="overflow: auto; height: 200px;">
+        <thead>
+          <tr>
+            <th scope="col">Artist</th>
+            <th scope="col">Song</th>
+            <th scope="col">Album</th>
+            <th scope="col">Length</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for song in playlist_songs %}
+          {% if song.user.id == request.session.userID %}
+          <tr>
+            <td>{{song.artist}}</td>
+            <td>{{song.song}}</td>
+            <td>{{song.album}}</td>
+            <td>{{song.duration}}</td>
+            <form action="/playSong" method="POST">
+              {% csrf_token %}
+              <td><button class="playButton" type="submit" name="button" value={{song.songId}}>Play Song</button></td>
+            </form>
+          </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    
+    <div class="liked_songs">
+      <table id="table_like" class="table_like">
+        <thead>
+          <tr>
+            <th scope="col">Artist</th>
+            <th scope="col">Song</th>
+            <th scope="col">Album</th>
+            <th scope="col">Length</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for song in liked_songs %}
+          {% if song.user.id == request.session.userID %}
+          <tr>
+            <td>{{song.artist}}</td>
+            <td>{{song.song}}</td>
+            <td>{{song.album}}</td>
+            <td>{{song.duration}}</td>
+            <form action="/playSong" method="POST">
+              {% csrf_token %}
+              <td><button class="playButton" type="submit" name="button" value={{song.songId}}>Play Song</button></td>
+            </form>
+          </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <script>
+      $(document).ready(function () {
+        $("table").hide();
+        $(".button-toggle").click(function () {
+          $("#table").toggle();
+        });
+        $(".button-toggle-like").click(function () {
+          $("#table_like").toggle();
+        });
+      });
+    </script>
+  </body>
+</html>
